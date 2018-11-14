@@ -1,2 +1,2 @@
 # Alsas
-our testgitrepository
+testgitrepository for our game Alsas
