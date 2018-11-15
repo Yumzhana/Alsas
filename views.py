@@ -1,16 +1,16 @@
-from app import app
+from app import app, templateHTML
 
 @app.route('/')
 def homepage():
-    return "Поиск"
+    return templateHTML('index.html')
 
 @app.route('/results')
 def results():
-    return "Результаты поиска"
+    return templateHTML('results.html')
 
 @app.route('/event')
 def event():
-    return "Мероприятие"
+    return templateHTML('event.html')
 
 
 
