@@ -1,4 +1,6 @@
+# отвечает за пути, чтобы не засорять код приложения
 from app import app, templateHTML
+import db
 
 @app.route('/')
 def homepage():
@@ -11,6 +13,22 @@ def results():
 @app.route('/event')
 def event():
     return templateHTML('event.html')
+
+@app.route('/user/<username>')
+def user_page(username):
+    name_data = db._users.get(username)
+    return templateHTML('index.html', user=name_data)
+
+
+
+
+
+
+
+
+# сделать айди мероприятий
+
+
 
 
 
