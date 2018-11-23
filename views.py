@@ -4,20 +4,14 @@ import db
 
 @app.route('/')
 def homepage():
-    return templateHTML('index.html')
+    return templateHTML('_index.html')
 
-@app.route('/results')
-def results():
-    return templateHTML('results.html')
 
-@app.route('/event')
-def event():
-    return templateHTML('event.html')
+@app.route('/events/<events>')
+def user_page(events):
+    name_data = db._event[events]
+    return templateHTML('_event.html', info=name_data, type=events)
 
-@app.route('/user/<username>')
-def user_page(username):
-    name_data = db._users.get(username)
-    return templateHTML('index.html', user=name_data)
 
 
 
