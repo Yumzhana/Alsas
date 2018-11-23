@@ -9,9 +9,8 @@ def homepage():
 
 @app.route('/events/<events>')
 def user_page(events):
-    name_data = db._event[events]
+    name_data = db._event.get(events)
     return templateHTML('_event.html', info=name_data, type=events)
-
 
 
 
