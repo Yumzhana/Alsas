@@ -20,8 +20,27 @@ _event = {
 
 }
 
-def eventsearch(db, searchword):
-    return db[searchword]
+_event_list = []
+
+for event_type, events in _event.items():
+    for event in events:
+        _new_element = {'event_type': event_type}
+        _new_element.update(event)
+        _event_list.append(_new_element)
+
+def get_events_by_name(q):
+    results = []
+
+    for event in _event_list:
+        if event['event_type'] == q:
+            results.append(event)
+        return results
+
+def get_event():
+    return
+
+# def eventsearch(db, searchword):
+    # return db[searchword]
 
 
 

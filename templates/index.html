@@ -19,16 +19,16 @@
     </section>
     <style>
         section1 {
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) }
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%)
+        }
     </style>
     <section1>
-        <form class="form-inline md-form mr-auto mb-4">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit">Search
-            </button>
+        <form action="/search" method="get" >
+            <input type="search" name="query">
+            <button type="submit">Search</button>
         </form>
     </section1>
 </html>
