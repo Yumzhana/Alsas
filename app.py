@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request # Импорт нужных функций
 from database import list # Импорт нужного списка из базы данных
 
+import db, sqlite3
+
 app = Flask(__name__) # Обозначение функции Flask как переменную app
 
 def search(a, key): # Функция поиска по списку
@@ -13,6 +15,17 @@ def search(a, key): # Функция поиска по списку
 @app.route('/') # Функция route для указания пути (маршрута)
 def homepage(): # Задание функции
     return render_template('index.html') # Вывод html-файла по указанному маршруту
+
+@app.route('/') # Функция route для указания пути (маршрута)
+def helloworld(): # Задание функции
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+
+    c.execute("SELECT + FROM users")
+    users = list(c.fetchall())
+
+    conn.close()
+    return render_template('page01.html', users = users) # Вывод html-файла по указанному маршруту
 
 @app.route('/search') # Функция для указания маршрута
 def search_for_event(): # Функция, которая выполняется сразу при переходе по заданному адресу
