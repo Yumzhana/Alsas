@@ -3,6 +3,7 @@ import sqlite3
 
 # Connect ot Database - in local file app.db
 conn = sqlite3.connect('app.db')
+
 # Create a cursor - a
 c = conn.cursor()
 

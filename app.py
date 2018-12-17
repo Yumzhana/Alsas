@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request # Импорт нужных функций
-from database import list # Импорт нужного списка из базы данных
+from flask import Flask, render_template, request
+from database import list
 
 import db, sqlite3
 
