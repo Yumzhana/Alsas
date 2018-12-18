@@ -20,7 +20,7 @@ def index():
     events = list(c.fetchall())
     return render_template('_index.html', events=events)
 
-@app.route('/add_user', methods=['GET', 'POST'])
+@app.route('/add_events', methods=['GET', 'POST'])
 def add_user():
    events_created = False
 
@@ -42,7 +42,7 @@ def add_user():
         conn.commit()
         events_created = True
         conn.close()
-        # return redirect('/user/%s/' % user['title'])
+        return redirect('/')
 
 
    return render_template(

@@ -12,10 +12,14 @@
         </form>
 
         <br/>
+
+        <a href="/add_events"> Добавить событие </a>
+
+        <br/>
         <h3> События: </h3>
         {% for events in events %}
             <span>
-                <a href="/events/{{events.title}}/">{{events.title}}</a>
+                <a href="/events/{{events.id}}/">{{events.title}}</a>
                 <p>{{events.description}}</p>
             </span>
             <br />
