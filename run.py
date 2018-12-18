@@ -42,13 +42,34 @@ def add_user():
         conn.commit()
         events_created = True
         conn.close()
-        return redirect('/')
+        ##return redirect('/')
 
 
    return render_template(
         "add_events.html",
        events_created=events_created
    )
+
+
+@app.route('/search')
+def search_for_person():
+    q = request.args.get('query')
+
+    conn = sqlite3.connect('app.db')
+    conn.row_factory = dict_factory
+    c = conn.cursor()
+
+    # Handler logic here
+    c.execute("SELECT * FROM events WHERE title LIKE '%{q}%' OR id LIKE '%{q}%'"
+              "".format(q=q))
+    title = list(c.fetchall())
+
+    # Close connection
+    conn.close()
+
+    print(title)
+
+    return render_template('search_result.html', q=q, title=title)
 
 
 if __name__ == "__main__":
