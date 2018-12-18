@@ -1,5 +1,5 @@
 # отвечает за пути, чтобы не засорять код приложения
-from app import app, templateHTML
+from _app import app, templateHTML
 import db
 
 @app.route('/')

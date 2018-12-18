@@ -1,45 +1,55 @@
 from flask import Flask, render_template, request
-from database import list
+import sqlite3
 
-import db, sqlite3
+app = Flask(__name__)
 
-app = Flask(__name__) # Обозначение функции Flask как переменную app
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
 
-def search(a, key): # Функция поиска по списку
-    catalog = [] # Новвый список для всех результатов
-    for n in a: # Цикл, который перебирает все элементы в списке
-        if n == key: # Условие - если элемент совпадает с ключевым словом,
-            catalog.append(n) # Этот элемент добавляется в список catalog
-    return catalog # Возвращает список всех элементов, совпадающих с ключевым словом
-
-@app.route('/') # Функция route для указания пути (маршрута)
-def homepage(): # Задание функции
-    return render_template('index.html') # Вывод html-файла по указанному маршруту
-
-@app.route('/') # Функция route для указания пути (маршрута)
-def helloworld(): # Задание функции
+@app.route('/')
+def index():
     conn = sqlite3.connect('app.db')
+    conn.row_factory = dict_factory
     c = conn.cursor()
 
-    c.execute("SELECT + FROM users")
-    users = list(c.fetchall())
+    # Handler logic here
+    c.execute("SELECT * FROM events")
+    events = list(c.fetchall())
+    return render_template('_index.html', events=events)
 
-    conn.close()
-    return render_template('page01.html', users = users) # Вывод html-файла по указанному маршруту
+@app.route('/add_user', methods=['GET', 'POST'])
+def add_user():
+   events_created = False
 
-@app.route('/search') # Функция для указания маршрута
-def search_for_event(): # Функция, которая выполняется сразу при переходе по заданному адресу
-    q = request.args.get('query') # Создаем переменную, которая равна запросу
-    events = search(list, q) # Создаем переменную, которая выполняет функцию search в конкретном списке и по конкретному запросу
-    return render_template('results.html', t = q, g = events ) # Вывод html-файла и передача на него результатов поиска
+   if request.method == 'POST':
+        # add new user data
+        user = {}
+        user['title'] = request.form.get('title')
+        user['description'] = request.form.get('description')
+
+        # save to database
+        conn = sqlite3.connect('app.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM events where title='%s'" % user['title'])
+        c.execute("INSERT INTO events "
+                 "(title, description) "
+                 "VALUES "
+                 "('{title}','{description}')"
+                 "".format(**user))
+        conn.commit()
+        events_created = True
+        conn.close()
+        # return redirect('/user/%s/' % user['title'])
 
 
-if __name__ == "__main__": # Дефолтное выражение, проверяющее подключен ли фласк
-    app.run() # Запуск приложения
+   return render_template(
+        "add_events.html",
+       events_created=events_created
+   )
 
 
-
-
-
-
-
+if __name__ == "__main__":
+    app.run()

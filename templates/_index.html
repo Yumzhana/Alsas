@@ -5,7 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-Вы искали: {{ t }} <br/>
-Результат: {{ g }}
+
+        <form action="/search" method="get" >
+            <input type="search" name="query">
+            <button type="submit">Search</button>
+        </form>
+
+        <br/>
+        <h3> События: </h3>
+        {% for events in events %}
+            <span>
+                <a href="/events/{{events.title}}/">{{events.title}}</a>
+                <p>{{events.description}}</p>
+            </span>
+            <br />
+        {% endfor%}
+
 </body>
 </html>
