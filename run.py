@@ -16,12 +16,13 @@ def index():
     c = conn.cursor()
 
     # Handler logic here
-    c.execute("SELECT * FROM events")
+    c.execute("SELECT * FROM users")
     events = list(c.fetchall())
+    print(events)
     return render_template('_index.html', events=events)
 
 @app.route('/add_events', methods=['GET', 'POST'])
-def add_user():
+def add_events():
    events_created = False
 
    if request.method == 'POST':
@@ -42,11 +43,34 @@ def add_user():
         conn.commit()
         events_created = True
         conn.close()
-        ##return redirect('/')
+
+@app.route('/registration', methods=['GET', 'POST'])
+def add_user():
+   events_created = False
+
+   if request.method == 'POST':
+       user = {}
+       user['login'] = request.form.get('login')
+       user['password'] = request.form.get('password')
+       user['name'] = request.form.get('password')
+       user['img'] = request.form.get('password')
+
+       # save to database
+       conn = sqlite3.connect('app.db')
+       c = conn.cursor()
+       c.execute("SELECT * FROM users where title='%s'" % user['login'])
+       c.execute("INSERT INTO users "
+                 "(login, password, name, img) "
+                 "VALUES "
+                 "('{login}','{password}','{name}','{img}')"
+                 "".format(**user))
+       conn.commit()
+       events_created = True
+       conn.close()
 
 
    return render_template(
-        "add_events.html",
+        "registration.html",
        events_created=events_created
    )
 

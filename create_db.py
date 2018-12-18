@@ -15,6 +15,19 @@ CREATE TABLE events (
 ''')
 
 conn.commit()
+
+c.execute('''
+CREATE TABLE users (
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    password TEXT,
+    login TEXT
+    name TEXT
+    img TEXT
+)
+''')
+
+conn.commit()
+
 #
 # # Adding some data (feel free to use you own data)
 
