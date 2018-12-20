@@ -44,6 +44,11 @@ def add_events():
         events_created = True
         conn.close()
 
+   return render_template(
+       "add_events.html",
+       events_created=events_created
+   )
+
 @app.route('/registration', methods=['GET', 'POST'])
 def add_user():
    events_created = False

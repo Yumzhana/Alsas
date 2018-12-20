@@ -3,17 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        ._sear {
+            width: 80%;
+            float: left;
+        }
+
+        .form button {
+            margin-left:10px;
+        }
+
+        .center {
+            position:fixed;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            position:fixed;
+            left:0;
+            right:0;
+            height:120px;
+            z-index:5;
+        }
+
+        .hb {
+            float:right;
+            padding:20px 40px;
+        }
+    </style>
 </head>
 <body>
 
-        <form action="/search" method="get" >
-            <input type="search" name="query">
-            <button type="submit">Search</button>
-        </form>
+    <header>
+         <a class="hb" href="/add_events"> Добавить событие </a>
+    </header>
 
-        <br/>
+    <div class="center">
 
-        <a href="/add_events"> Добавить событие </a>
+        <div class="container">
+
+            <form class="form" method="get" action="/search">
+                <input placeholder="Введите название мероприятия. Например: кино" type="search" name="query" class="form-control _sear">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
 
 </body>
 </html>

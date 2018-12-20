@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Result</title>
 </head>
 <body>
@@ -9,7 +10,7 @@
     <h3> События: </h3>
     {% for e in title %}
         <span>
-            <a href="">{{e.title}}</a>
+            <h4><a href="">{{e.title}}</a></h4>
             <p>{{e.description}}</p>
         </span>
         <br />
