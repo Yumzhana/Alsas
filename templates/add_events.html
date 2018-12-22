@@ -13,10 +13,10 @@
 </head>
 <body>
     {% if events_created %}
-        <div class="alert alert-success">User Created</div>
+        <div class="alert alert-success">Событие создано. Вы можете вернуться на <a href="/"> главную </a></div>
     {%endif%}
     <div class="container">
-        <h1> Создай своё событие </h1>
+        <h1> Создай своё событие!</h1>
 
         <form method="post" action="/add_events">
             <div class="form-group">
@@ -28,7 +28,7 @@
                 <input class="form-control" type="text" name="description" required>
 
             </div>
-            <button type="submit" class="btn btn-success"> Add Events </button>
+            <button type="submit" class="btn btn-success"> Создать </button>
         </form>
 
     </div>

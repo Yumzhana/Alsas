@@ -8,9 +8,9 @@
 <body>
 
     <h3> События: </h3>
-    {% for e in title %}
+    {% for e in result %}
         <span>
-            <h4><a href="">{{e.title}}</a></h4>
+            <h4><a href="/events/{{e.id}}">{{e.title}}</a></h4>
             <p>{{e.description}}</p>
         </span>
         <br />

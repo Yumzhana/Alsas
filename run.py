@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -16,9 +16,11 @@ def index():
     c = conn.cursor()
 
     # Handler logic here
-    c.execute("SELECT * FROM users")
+    c.execute("SELECT * FROM events")
     events = list(c.fetchall())
-    print(events)
+
+    events.reverse()
+
     return render_template('_index.html', events=events)
 
 @app.route('/add_events', methods=['GET', 'POST'])
@@ -83,22 +85,29 @@ def add_user():
 @app.route('/search')
 def search_for_person():
     q = request.args.get('query')
+    w = q.split(' ')
+    print(w)
+    result = []
 
     conn = sqlite3.connect('app.db')
     conn.row_factory = dict_factory
     c = conn.cursor()
 
-    # Handler logic here
-    c.execute("SELECT * FROM events WHERE title LIKE '%{q}%' OR id LIKE '%{q}%'"
-              "".format(q=q))
-    title = list(c.fetchall())
+    for x in w:
+        print(x)
+        c.execute("SELECT * FROM events WHERE title LIKE '%{q}%' OR id LIKE '%{q}%'"
+                  "".format(q=x))
+
+        list = c.fetchall()
+        print(list)
+        for y in list:
+            result.append(y)
 
     # Close connection
     conn.close()
+    return render_template('search_result.html', result=result)
 
-    print(title)
 
-    return render_template('search_result.html', q=q, title=title)
 
 
 if __name__ == "__main__":

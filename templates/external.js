@@ -1,0 +1,1 @@
+const pipka = { name: 'sevent'};
