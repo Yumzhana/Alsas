@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -42,15 +42,25 @@
         hr {
             float:left;
             width:10%;
+        }
 
+        .all {
+            font-size:12px;
         }
     </style>
 </head>
 <body>
 
     <header>
-         <a class="hb" href="/add_events"> Добавить событие </a>
-        <a class="hb" href="/add_events"> Личный кабинет </a>
+        <h5 style="float:left; padding:20px 40px;"> NeTinder </h5>
+        {% if user.status == true %}
+            <a class="hb" href="/exit"> Выход </a>
+            <a class="hb" href="/add_events"> Добавить событие </a>
+        {% else %}
+            <a class="hb" href="/registration"> Регистрация </a>
+            <a class="hb" href="/login"> Вход </a>
+        {% endif %}
+
     </header>
 
     <div class="center">
@@ -62,14 +72,14 @@
                 <button type="submit" class="btn btn-primary"> Поиск </button>
             </form>
 
-            <p> Последние события:</p>
+            <p style="padding-top:30px;"> Последние события:</p>
             {% for e in range(3) %}
                 <span>
-                    <a href="/events/{{events[e].title}}">{{events[e].title}}</a>
+                    <a href="/event/{{events[e].id}}">{{events[e].title}}</a>
                 </span>
                 <br />
             {% endfor%}
-            <a href="/search?query=">Посмотреть все</a>
+            <a href="/search?query=" class="all">Посмотреть все</a>
 
         </div>
 

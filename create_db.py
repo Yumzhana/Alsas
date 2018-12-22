@@ -38,6 +38,50 @@ c.execute('''
 
 conn.commit()
 
+user_list = [
+    {
+        'login': 'admin',
+        'password': 'admin',
+    },
+    {
+        'login': 'Masha',
+        'password': '12345',
+    },
+    {
+        'login': 'Alesha',
+        'password': 'qwerty',
+    }
+]
+
+for user in user_list:
+    c.execute("INSERT INTO users "
+
+    "(login, password) "
+    "VALUES "
+    "('{login}','{password}')".format(**user))
+    conn.commit()
+
+event_list = [
+    {
+        'title': 'Концерт Монеточки',
+        'description': '5 февраля, 2019 года',
+    },
+    {
+        'title': 'Спектакль Мастер и Маргарита',
+        'description': 'Собираюсь в театр. 10 января жду всех',
+    },
+    {
+        'title': 'Театр Балтийский дом',
+        'description': 'Пошлите в театр',
+    }
+]
+
+for event in event_list:
+    c.execute("INSERT INTO events "
+              "(title, description) "
+              "VALUES "
+              "('{title}','{description}')".format(**event))
+    conn.commit()
 #
 # c.execute('''
 #     ALTER TABLE users

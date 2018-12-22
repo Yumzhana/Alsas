@@ -1,1 +1,0 @@
-const pipka = { name: 'sevent'};

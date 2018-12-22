@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Add new user</title>
+    <style>
+        header {
+            position:fixed;
+            left:0;
+            right:0;
+            height:120px;
+            z-index:5;
+        }
+        .hb {
+            float:right;
+            padding:20px 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" style="float:left; padding:20px 40px;"> Вернуться </a>
+            <a class="hb" href="/registration"> Регистрация </a>
+    </header>
+
+    {% if loginComplete %}
+        <div class="alert alert-success">Вход прошел успешно</div>
+    {%endif%}
+
+    {% if loginError %}
+        <div class="alert alert-warning">Не удалось осуществить вход</div>
+    {%endif%}
+
+    <div class="container" style="padding-top:80px">
+            <h1> Вход </h1>
+            <form method="post" action="/login">
+                <div class="form-group">
+
+                    <label>Логин</label>
+                    <input class="form-control" type="text" name="login" required>
+
+                    <label>Пароль</label>
+                    <input class="form-control" type="text" name="password" required>
+
+                </div>
+                <button type="submit" class="btn btn-success"> Вход </button>
+            </form>
+    </div>
+</body>
+</html>
