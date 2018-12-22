@@ -2,22 +2,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Add new user</title>
+    <title> Добавить событие </title>
+    <style>
+        header {
+            position:fixed;
+            left:0;
+            right:0;
+            height:120px;
+            z-index:5;
+        }
+        .hb {
+            float:right;
+            padding:20px 40px;
+        }
+    </style>
 </head>
 <body>
-
-
+    <header>
+        <a href="/" style="float:left; padding:20px 40px;"> Вернуться </a>
+        <a class="hb" href="/exit"> Выход </a>
+    </header>
     {% if events_created %}
         <div class="alert alert-success">Событие создано. Вы можете вернуться на <a href="/"> главную </a></div>
     {%endif%}
-    <div class="container">
+    <div class="container" style="padding-top:80px">
         <h1> Создай своё событие!</h1>
 
         <form method="post" action="/add_events">

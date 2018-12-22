@@ -4,7 +4,6 @@ import sqlite3
 class User():
     status = False
 
-
 app = Flask(__name__)
 
 def dict_factory(cursor, row):
@@ -19,40 +18,35 @@ def index():
     conn.row_factory = dict_factory
     c = conn.cursor()
     c.execute("SELECT * FROM events")
-    u = conn.cursor()
-    u.execute("SELECT * FROM users")
     events = list(c.fetchall())
-    users = list(u.fetchall())
-
-    print(users)
-
     events.reverse()
-    users.reverse()
 
-    return render_template('index.html', events=events, user=User, users=users)
+    return render_template('index.html', events=events, user=User)
 
 @app.route('/add_events', methods=['GET', 'POST'])
 def add_events():
    events_created = False
 
    if request.method == 'POST':
-        # add new user data
-        user = {}
-        user['title'] = request.form.get('title')
-        user['description'] = request.form.get('description')
+        _events = {}
+        _events['title'] = request.form.get('title')
+        _events['description'] = request.form.get('description')
 
         # save to database
         conn = sqlite3.connect('app.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM events where title='%s'" % user['title'])
+        c.execute("SELECT * FROM events where title='%s'" % _events['title'])
         c.execute("INSERT INTO events "
                  "(title, description) "
                  "VALUES "
                  "('{title}','{description}')"
-                 "".format(**user))
+                 "".format(**_events))
         conn.commit()
         events_created = True
         conn.close()
+
+   if (events_created):
+       return redirect('/')
 
    return render_template(
        "add_events.html",
