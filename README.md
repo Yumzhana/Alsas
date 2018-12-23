@@ -1,2 +1,2 @@
-# Alsas
-testgitrepository for our game Alsas
+# NeTinder
+testgitrepository for our app NeTinder
