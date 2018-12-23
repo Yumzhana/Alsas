@@ -20,7 +20,6 @@ def index():
     c.execute("SELECT * FROM events")
     events = list(c.fetchall())
     events.reverse()
-
     return render_template('index.html', events=events, user=User)
 
 @app.route('/add_events', methods=['GET', 'POST'])
@@ -62,8 +61,7 @@ def add_user():
        user = {}
        user['login'] = request.form.get('login')
        user['password'] = request.form.get('password')
-
-       # save to database
+       
        conn = sqlite3.connect('app.db')
        c = conn.cursor()
        c.execute("SELECT * FROM users where login='%s'" % user['login'])
@@ -139,7 +137,6 @@ def search_for_person():
         for y in list:
             result.append(y)
 
-    # Close connection
     conn.close()
     return render_template('search_result.html', result=result, user=User)
 
@@ -151,7 +148,6 @@ def event_page(event_id):
     conn.row_factory = dict_factory
     c = conn.cursor()
 
-    # Handler logic here
     c.execute("SELECT * FROM events WHERE id LIKE '%{q}%'"
               "".format(q=event_id))
     events = list(c.fetchall())
